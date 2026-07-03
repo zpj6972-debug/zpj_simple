@@ -1,0 +1,38 @@
+# .cursorrules — AI IDE 通用规则
+
+## 项目身份
+
+super-platform 是一个基于 Vue 3 + TypeScript + Vite 的大型中后台管理系统，使用 Element Plus、Pinia、Tailwind CSS v4、pnpm。
+
+## 核心原则
+
+- 使用 Vue 3 Composition API + `<script setup lang="ts">`
+- 优先显式类型，禁止隐式 any
+- 组件职责单一，文件超过 250 行必须拆分
+- API、Store、组件、工具四层隔离
+- 禁止修改基础设施和公共组件（详见 system.md 红线）
+
+## 开发边界
+
+- 允许: 实现新页面、新组件、新 API、新 composable、新 store、修复指定 bug、重构指定模块
+- 禁止: 修改 src/utils/http.ts、src/router/、src/store/index.ts、src/config/index.ts、build/、vite.config.ts、.env
+- 禁止: 删除/重命名/改动 ReXxx 公共组件的 props/emits/slots
+- 禁止: 引入新的全局依赖
+- 禁止: 写死调试代码、测试数据
+
+## 代码风格
+
+- Prettier: 双引号、无尾逗号、箭头函数单参数省略括号
+- ESLint: Vue/TS 推荐规则，禁止隐式 any
+- SFC: script → template → style，style 必须 scoped
+- 命名: 页面 `views/<feature>/index.vue`，通用组件 `components/ReXxx/index.vue`，composable `useXxx.ts`
+
+## 自检命令
+
+```bash
+pnpm lint
+pnpm typecheck
+pnpm build
+```
+
+所有提交前必须全部通过。
